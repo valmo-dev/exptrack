@@ -42,7 +42,7 @@ function handleSubmit() {
         </div>
 
         <div class="modal-action">
-          <button type="button" class="btn btn-accent" @click="emit('close')">
+          <button type="button" class="btn" @click="emit('close')">
             Annuler
           </button>
           <button type="submit" class="btn btn-primary">Sauvegarder</button>
