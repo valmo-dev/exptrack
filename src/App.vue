@@ -29,7 +29,7 @@ const savingRateValentin = computed({
   <div class="min-h-screen bg-base-200">
     <div class="container mx-auto p-6">
       <div class="prose prose-lg mx-auto mb-8">
-        <h1 class="text-3xl font-bold text-center">Calculateur de Budget</h1>
+        <h1 class="text-3xl font-bold text-center">ExpTrack</h1>
       </div>
 
       <BudgetForm />
