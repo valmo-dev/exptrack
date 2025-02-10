@@ -1,4 +1,7 @@
 <script setup>
+import { ref } from "vue";
+import EditModal from "./EditModal.vue";
+
 const props = defineProps({
   budgetItems: {
     type: Array,
@@ -8,22 +11,22 @@ const props = defineProps({
 
 const emit = defineEmits(["edit", "delete"]);
 
-function useBudgetTable(emitFunction) {
-  const handleDelete = (index) => {
-    emitFunction("delete", index);
-  };
+const showEditModal = ref(false);
+const selectedItem = ref(null);
 
-  const handleEdit = (index) => {
-    emitFunction("edit", index);
-  };
-
-  return {
-    handleDelete,
-    handleEdit,
-  };
+function openEditModal(item, index) {
+  selectedItem.value = { ...item, index };
+  showEditModal.value = true;
 }
 
-const { handleDelete, handleEdit } = useBudgetTable(emit);
+function handleSave(updatedItem) {
+  emit("edit", selectedItem.value.index, updatedItem);
+  showEditModal.value = false;
+}
+
+function handleDelete(index) {
+  emit("delete", index);
+}
 </script>
 
 <template>
@@ -35,6 +38,7 @@ const { handleDelete, handleEdit } = useBudgetTable(emit);
         <thead>
           <tr>
             <th>Type</th>
+            <th>Assigné à</th>
             <th>Catégorie</th>
             <th>Montant</th>
             <th>Actions</th>
@@ -42,13 +46,14 @@ const { handleDelete, handleEdit } = useBudgetTable(emit);
         </thead>
         <tbody>
           <tr v-for="(item, index) in props.budgetItems" :key="index">
-            <td>{{ item.type }}</td>
+            <td class="font-bold capitalize">{{ item.type }}</td>
+            <td>{{ item.owner }}</td>
             <td>{{ item.category }}</td>
-            <td>{{ item.amount }}</td>
+            <td>{{ item.amount }} €</td>
             <td class="space-x-2">
               <button
                 class="btn btn-sm btn-outline btn-primary"
-                @click="handleEdit(index)"
+                @click="openEditModal(item, index)"
               >
                 Modifier
               </button>
@@ -63,5 +68,12 @@ const { handleDelete, handleEdit } = useBudgetTable(emit);
         </tbody>
       </table>
     </div>
+
+    <EditModal
+      :isOpen="showEditModal"
+      :item="selectedItem"
+      @save="handleSave"
+      @close="showEditModal = false"
+    />
   </div>
 </template>
