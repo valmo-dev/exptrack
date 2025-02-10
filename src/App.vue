@@ -28,6 +28,11 @@ const savingRateValentin = computed({
 <template>
   <div class="min-h-screen bg-base-200">
     <div class="container mx-auto p-6">
+      <img
+        src="/src/assets/exptrack-logo.webp"
+        alt="ExpTrack"
+        class="w-16 h-16 mx-auto mb-8"
+      />
       <div class="prose prose-lg mx-auto mb-8">
         <h1 class="text-3xl font-bold text-center">ExpTrack</h1>
       </div>
