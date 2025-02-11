@@ -38,16 +38,7 @@ const savingRateValentin = computed({
           <h1 class="text-3xl font-bold text-center">ExpTrack</h1>
         </div>
       </div>
-
-      <BudgetForm />
-
-      <BudgetTable
-        :budgetItems="budgetStore.items"
-        @delete="deleteItem"
-        @edit="editItem"
-      />
-
-      <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Carte Marine -->
         <div class="card bg-base-100 shadow-xl p-6">
           <h2 class="text-xl font-bold mb-4">Résumé - Marine</h2>
@@ -151,6 +142,14 @@ const savingRateValentin = computed({
           </div>
         </div>
       </div>
+
+      <BudgetForm />
+
+      <BudgetTable
+        :budgetItems="budgetStore.items"
+        @delete="deleteItem"
+        @edit="editItem"
+      />
     </div>
   </div>
 </template>
